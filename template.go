@@ -16,6 +16,7 @@ package tpl
 import (
 	"errors"
 	"fmt"
+	"github.com/singsenxc/tpl/utils"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -25,7 +26,6 @@ import (
 	"regexp"
 	"strings"
 	"sync"
-	"tpl/utils"
 )
 
 const (
@@ -49,14 +49,17 @@ func SetRunnmode(mode int) {
 	runmode = mode
 }
 
+//SetViewsPath default is "views"
 func SetViewsPath(path string) {
 	viewsPath = path
 }
 
+//SetTemplateLeft default is "{{"
 func SetTemplateLeft(left string) {
 	templateLeft = left
 }
 
+//SetTemplateRight default is "}}"
 func SetTemplateRight(right string) {
 	templateRight = right
 }
@@ -265,6 +268,7 @@ func _getTemplate(t0 *template.Template, root string, subMods [][]string, others
 func AddFuncMap(key string, fn interface{}) {
 	tplFuncMap[key] = fn
 }
+
 func AddTemplateEngine(extension string, fn templatePreProcessor) {
 	AddTemplateExt(extension)
 	templateEngines[extension] = fn
