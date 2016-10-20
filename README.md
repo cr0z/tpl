@@ -2,6 +2,7 @@
 golang template engine
 
 从[beego](https://beego.me)框架中提取出的模板引擎
+a golang template engine that extracted from [beego](https://beego.me)
 
 # usage
 
