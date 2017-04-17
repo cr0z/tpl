@@ -19,20 +19,20 @@ import (
 	"html/template"
 )
 
-type Render struct {
+type render struct {
 	TplName        string
 	Layout         string
 	LayoutSections map[string]string
 	Data           map[string]interface{}
 }
 
-func (r *Render) RenderString() (string, error) {
+func (r *render) RenderString() (string, error) {
 	b, e := r.RenderBytes()
 	return string(b), e
 }
 
 // RenderBytes returns the bytes of rendered template string. Do not send out response.
-func (r *Render) RenderBytes() ([]byte, error) {
+func (r *render) RenderBytes() ([]byte, error) {
 	buf, err := r.renderTemplate()
 	//if the controller has set layout, then first get the tplName's content set the content to the layout
 	if err == nil && r.Layout != "" {
@@ -51,14 +51,13 @@ func (r *Render) RenderBytes() ([]byte, error) {
 				r.Data[sectionName] = template.HTML(buf.String())
 			}
 		}
-
 		buf.Reset()
 		executeTemplate(&buf, r.Layout, r.Data)
 	}
 	return buf.Bytes(), err
 }
 
-func (r *Render) renderTemplate() (bytes.Buffer, error) {
+func (r *render) renderTemplate() (bytes.Buffer, error) {
 	var buf bytes.Buffer
 	if r.TplName == "" {
 		return buf, errors.New("tplname is null")
@@ -79,4 +78,10 @@ func (r *Render) renderTemplate() (bytes.Buffer, error) {
 		BuildTemplate(viewsPath, buildFiles...)
 	}
 	return buf, executeTemplate(&buf, r.TplName, r.Data)
+}
+
+func NewRender() *render {
+	return &render{
+		Data: make(map[string]interface{}),
+	}
 }

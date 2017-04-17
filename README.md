@@ -1,13 +1,10 @@
 # tpl
-golang template engine
-
-从[beego](https://beego.me)框架中提取出的模板引擎
-a golang template engine that extracted from [beego](https://beego.me)
-
+golang template engine  
+从[beego](https://beego.me)框架中提取出的模板引擎  
 # usage
-
 ```goget -u github.com/singsenxc/tpl```
-```
+```go
+package main
 import (
 	"github.com/singsenxc/tpl"
 	"log"
@@ -16,11 +13,11 @@ import (
 
 func main() {
 	tpl.SetViewsPath("views")	//if not set, default is "views"
-	tpl.SetTemplateLeft("{{")	//deflult is "{{"
-	tpl.SetTemplateRight("}}")	//deflult is "}}"
+	tpl.SetTemplateLeft("{{")	//default is "{{"
+	tpl.SetTemplateRight("}}")	//default is "}}"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		render := tpl.Render{Data: make(map[string]interface{})}
+		render := tpl.NewRender()
 		render.TplName = "index.tpl"
 		render.Data["Name"] = "Singsen"
 		b, e := render.RenderBytes()
@@ -36,7 +33,7 @@ func main() {
 }
 ```
 views/index.tpl
-```
+```html
 <html>
 <head>
 	<title></title>
@@ -48,6 +45,6 @@ views/index.tpl
 </html>
 ```
 views/header.tpl
-```
+```html
 <p>this is header</p>
 ```
