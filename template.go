@@ -16,7 +16,7 @@ package tpl
 import (
 	"errors"
 	"fmt"
-	"github.com/singsenxc/tpl/utils"
+	"github.com/x-croz/tpl/utils"
 	"html/template"
 	"io"
 	"io/ioutil"
