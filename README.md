@@ -2,11 +2,11 @@
 golang template engine  
 从[beego](https://beego.me)框架中提取出的模板引擎  
 # usage
-```goget -u github.com/singsenxc/tpl```
+```go get -u github.com/x-croz/tpl```
 ```go
 package main
 import (
-	"github.com/singsenxc/tpl"
+	"github.com/x-croz/tpl"
 	"log"
 	"net/http"
 )
