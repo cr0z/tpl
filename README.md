@@ -12,6 +12,10 @@ import (
 	"net/http"
 )
 
+func init() {
+    tpl.SetViewsPath("tpl")// default is "tpl" if not set
+}
+
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		render := tpl.NewRender()
@@ -27,7 +31,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":2333", nil))
 }
 ```
-views/index.tpl
+tpl/index.tpl
 ```html
 <html>
 <head>
@@ -39,7 +43,7 @@ views/index.tpl
 </body>
 </html>
 ```
-views/header.tpl
+tpl/header.tpl
 ```html
 <p>this is header</p>
 ```

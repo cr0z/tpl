@@ -42,7 +42,7 @@ var (
 	templateLeft    = "{{"
 	templateRight   = "}}"
 	runmode         = 0
-	viewsPath       = "views"
+	viewsPath       = "tpl"
 )
 
 func SetRunnmode(mode int) {
@@ -287,6 +287,5 @@ func executeTemplate(wr io.Writer, name string, data interface{}) error {
 		return err
 	}
 	// panic("can't find templatefile in the path:" + name)
-	log.Println("can't find templatefile in the path:" + name)
 	return errors.New("can't find templatefile in the path:" + name)
 }
