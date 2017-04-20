@@ -17,6 +17,7 @@ import (
 	"bytes"
 	"errors"
 	"html/template"
+	"io"
 )
 
 type render struct {
@@ -24,6 +25,15 @@ type render struct {
 	Layout         string
 	LayoutSections map[string]string
 	Data           map[string]interface{}
+}
+
+func (r *render) Render(w io.Writer) error {
+	b, e := r.RenderBytes()
+	if e != nil {
+		return e
+	}
+	_, e = w.Write(b)
+	return e
 }
 
 func (r *render) RenderString() (string, error) {

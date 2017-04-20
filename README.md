@@ -1,10 +1,11 @@
 # tpl
 golang template engine  
 从[beego](https://beego.me)框架中提取出的模板引擎  
-# usage
+Usage:  
 ```go get -u github.com/x-croz/tpl```
 ```go
 package main
+
 import (
 	"github.com/x-croz/tpl"
 	"log"
@@ -12,22 +13,16 @@ import (
 )
 
 func main() {
-	tpl.SetViewsPath("views")	//if not set, default is "views"
-	tpl.SetTemplateLeft("{{")	//default is "{{"
-	tpl.SetTemplateRight("}}")	//default is "}}"
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		render := tpl.NewRender()
 		render.TplName = "index.tpl"
-		render.Data["Name"] = "Singsen"
-		b, e := render.RenderBytes()
+		render.Data["Name"] = "CROZ"
+		e := render.Render(w)
 		if e != nil {
 			http.Error(w, e.Error(), 500)
 			return
 		}
-		w.WriteHeader(200)
-		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		w.Write(b)
+		
 	})
 	log.Fatal(http.ListenAndServe(":2333", nil))
 }
